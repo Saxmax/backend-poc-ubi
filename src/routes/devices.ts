@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import queries from '../services/queries';
+import deviceController from '../controllers/devices';
 
 const devicesRouter = Router();
-devicesRouter.get('/', queries.getDevices);
-devicesRouter.get('/:id', queries.getDeviceById);
-devicesRouter.post('/', queries.addDevice);
-devicesRouter.put('/:id', queries.updateDevice);
-devicesRouter.delete('/:id', queries.removeDevice);
+devicesRouter.get('/', deviceController.getDevices);
+devicesRouter.get('/:id', deviceController.getDevice);
+devicesRouter.post('/', deviceController.addDevice);
+devicesRouter.put('/:id', deviceController.updateDevice);
+devicesRouter.delete('/:id', deviceController.removeDevice);
 
 export default devicesRouter;
