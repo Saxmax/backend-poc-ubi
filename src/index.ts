@@ -1,21 +1,29 @@
-import express, { Request, Response } from 'express';
-import deviceRoutes from './routes/devices';
+import 'dotenv/config';
+import express from 'express';
+import bodyParser from 'body-parser';
+import { route_api, route_devices, route_help } from './routes';
 
-// import pg, { Pool } from 'pg';
-// Database client.
-// const db_pool = new Pool();
-// const db_client = await db_pool.connect();
+const init = async () => {
+  const port = process.env.PORT || 3001;
+  const app = express();
 
-const app = express();
-const port = process.env.PORT || 3001;
+  // Apply middlewares
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.json());
-app.use('/api', deviceRoutes);
+  // Apply routes
+  app.use('/api', route_api);
+  app.use('/api/help', route_help);
+  app.use('/api/devices', route_devices);
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, TypeScript Express!');
-});
+  app.listen(port, (error) => {
+    if (error) {
+      console.log(error);
+      return process.exit(1);
+    }
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+    console.log(`Server listening on port: ${port}`);
+  });
+};
+
+init();
