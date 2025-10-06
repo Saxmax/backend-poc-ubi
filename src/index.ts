@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { route_api, route_devices, route_help } from './routes';
+import queries from './services/queries';
 
 const init = async () => {
   const port = process.env.PORT || 3001;
@@ -25,5 +26,13 @@ const init = async () => {
     console.log(`Server listening on port: ${port}`);
   });
 };
+
+try {
+  queries.seedInitial();
+  console.log('Database :: Successfully seeded database!');
+} catch (error: any) {
+  console.log('Database :: Could not seed database:');
+  console.log(error.message);
+}
 
 init();
