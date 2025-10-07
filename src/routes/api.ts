@@ -8,7 +8,7 @@ const messages = [
 ];
 
 const apiRouter = Router();
-apiRouter.get('/', async (req: Request, res: Response) => {
+apiRouter.get('/', async (_req: Request, res: Response) => {
   return res.send({ message: messages });
 });
 

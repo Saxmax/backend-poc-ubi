@@ -35,5 +35,4 @@ try {
   console.log(error.message);
 }
 
-console.log('Database :: Successfully seeded database!');
 init();

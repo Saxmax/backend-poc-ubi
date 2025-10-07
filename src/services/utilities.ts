@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { SuccessResponseMessage } from '../_common/SuccessResponseMessageType';
-import { DeviceDefaults, DeviceType, IDevice } from '../_common/DeviceType';
+import { DeviceDefaults, DeviceType } from '../_common/DeviceType';
 
 class UtilityService {
   static successResponse = (res: Response, message: SuccessResponseMessage, status = StatusCodes.OK) => {
@@ -14,12 +14,17 @@ class UtilityService {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Database error', message });
   };
 
-  static getValidProperties = (data: any, addDefaults = true) => {
+  static getValidProperties = (data: any, addDefaults = true, ignoreMac = false) => {
     if (addDefaults === true) {
       data = { ...DeviceDefaults, ...data };
     }
 
-    const result = DeviceType.safeParse(data);
+    let result;
+    if (ignoreMac === true) {
+      result = DeviceType.partial().safeParse(data);
+    } else {
+      result = DeviceType.safeParse(data);
+    }
 
     if (result.success === false) {
       console.log(`OnErrorValidation :: ${result.error.message}`);
@@ -59,10 +64,11 @@ class UtilityService {
       }
     }
 
-    return {
-      query: `UPDATE ${process.env.PG_TABLE} SET ${update} WHERE ${isMac ? 'mac' : 'id'} = ${identifier} RETURNING *`,
-      values: Array.from(Object.values(props)).map((value: any) => value.toString()),
-    };
+    const key = isMac ? 'mac_address' : 'id';
+    const value = isMac ? `'${identifier}'` : identifier;
+    const query = `UPDATE ${process.env.PG_TABLE} SET ${update} WHERE ${key} = ${value} RETURNING *`;
+    const values = Array.from(Object.values(props)).map((value: any) => value.toString());
+    return { query, values };
   };
 
   static getRandomFromArray = (arr: any[]) => {

@@ -1,7 +1,6 @@
 import UtilityService from '../services/utilities';
+import { DeviceStatus } from './DeviceStatus';
 import { IDevice } from './DeviceType';
-
-export const SeedTableDrop = `DROP TABLE IF EXISTS ${process.env.PG_TABLE}`;
 
 export const SeedTableCreate = `
   CREATE TABLE ${process.env.PG_TABLE} (
@@ -46,8 +45,7 @@ const getRandomChecksum = () => {
 };
 
 const getRandomStatus = () => {
-  const statuses = ['online', 'offline', 'timedout'];
-  return UtilityService.getRandomFromArray(statuses);
+  return UtilityService.getRandomFromArray(Object.values(DeviceStatus));
 };
 
 const getRandomVersion = () => {

@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { DeviceStatus } from './DeviceStatus';
 
 export const DeviceType = z.object({
   mac_address: z.string(),
@@ -17,7 +18,7 @@ export const DeviceDefaults: Partial<IDevice> = {
   name: 'Unknown Device',
   url: '',
   checksum: '-1',
-  status: 'unknown',
+  status: DeviceStatus.Unknown,
   firmware: 'N/A',
   hardware: 'N/A',
   software: 'N/A',

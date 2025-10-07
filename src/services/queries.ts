@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import { SeedInsertDevice, SeedTableCreate, SeedTableDrop } from '../_common/SeedData';
+import { SeedInsertDevice, SeedTableCreate } from '../_common/SeedData';
 import UtilityService from './utilities';
 
 class QueryService {

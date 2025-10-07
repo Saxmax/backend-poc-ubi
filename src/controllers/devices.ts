@@ -16,7 +16,7 @@ class DeviceController {
   _getDevice = async (identifier: number | string, _req: Request, res: Response) => {
     try {
       const device = await queries.getDevice(identifier);
-      UtilityService.successResponse(res, device.rows);
+      UtilityService.successResponse(res, device.rows[0]);
     } catch (error: any) {
       UtilityService.errorResponse(res, error.message);
     }
@@ -33,7 +33,7 @@ class DeviceController {
   };
 
   addDevice = async (req: Request, res: Response) => {
-    const props = UtilityService.getValidProperties(req.body);
+    const props = UtilityService.getValidProperties(req.body, true, false);
 
     if (props === null) {
       const message = `Missing value for 'mac_address' - could not monitor device.`;
@@ -51,7 +51,7 @@ class DeviceController {
   };
 
   _updateDevice = async (identifier: number | string, req: Request, res: Response) => {
-    const props = UtilityService.getValidProperties(req.body, false);
+    const props = UtilityService.getValidProperties(req.body, false, true);
 
     try {
       const device = await queries.updateDevice(identifier, props);
@@ -75,7 +75,7 @@ class DeviceController {
   _removeDevice = async (identifier: number | string, _req: Request, res: Response) => {
     try {
       const device = await queries.removeDevice(identifier);
-      const message = `Stopped monitoring device #${identifier}`;
+      const message = `Stopped monitoring device #${device.rows[0].id}`;
       UtilityService.successResponse(res, message);
     } catch (error: any) {
       UtilityService.errorResponse(res, error.message);

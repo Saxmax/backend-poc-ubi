@@ -1,6 +1,11 @@
-# Introduction
+# Work Test Process
 
-Lorem ipsum dolor ..
+I have not created a REST API backend service before, nor have I worked in Postgres.
+So this was a challenge not in writing code but in learning about these processes
+within the time allotted to me.
+
+I am comfortable in the Node.js and NPM environment and I have experimented with the Express package before,
+so this felt like a good place to start. And doing things in TypeScript would help by just having the type definitions of new packages.
 
 # Breakdown
 
