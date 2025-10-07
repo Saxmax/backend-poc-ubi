@@ -1,31 +1,22 @@
-# Introduction
+# Fauxbiquiti Device Monitoring System
 
-Lorem ipsum dolor ..
+This is a service meant to compile and run on any computer by utilizing Docker.
+It monitors registered devices (routers, security cameras, and more).
 
-# Breakdown
+## Installation
 
-The first step was to read through the task ("email") and define:
+- Clone this repository `git clone https://github.com/Saxmax/backend-poc-ubi.git`
+- Change directory `cd backend-poc-ubi`
+- Install modules `npm i`
+- Create a `.env` file by running `npm run create:env`
+- Initialize a docker container `docker compose up --build`
 
-- What is the product?
-- What features are asked for, or implied?
-- What tech stack is asked for, or implied?
+## Using
 
-## The product
+When you have the backend application up and running in a local docker container
+you can perform any of the listed API calls to `http://localhost:3000/api`.
 
-It should be a backend built in Node.js and here I take the freedom of coding in TypeScript,
-using a transpiler to deploy JavaScript code.
+Either use cURL in the terminal, or any software like Postman or Insomnia.
 
-## The features
-
-Lorem ipsum
-
-## The tech stack
-
-- Node.js
-- TypeScript
-- REST support
-- Postgres database
-- Checksum Generator
-- (Optional): gRPC support
-
-# Project AI Assistance
+This service supports all CRUD calls, but you can read more about the API calls
+in the `README.api.md` readme file

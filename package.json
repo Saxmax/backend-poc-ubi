@@ -6,7 +6,8 @@
     "start": "node dist/index.js",
     "build": "tsc",
     "serve": "node dist/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\""
   },
   "keywords": [],
   "author": "Max Huber",
