@@ -24,15 +24,16 @@ const init = async () => {
     }
 
     console.log(`Server listening on port: ${port}`);
+    console.log(`Begin by cURL'ing: http://localhost:3000/api`);
   });
 };
 
 try {
-  queries.seedInitial();
-  console.log('Database :: Successfully seeded database!');
+  queries.seedInitial(5);
 } catch (error: any) {
   console.log('Database :: Could not seed database:');
   console.log(error.message);
 }
 
+console.log('Database :: Successfully seeded database!');
 init();
