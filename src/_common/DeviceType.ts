@@ -1,25 +1,15 @@
 import * as z from 'zod';
-import { DeviceStatus } from './DeviceStatus';
+import { IHealthType } from './HealthType';
 
 export const DeviceType = z.object({
   mac_address: z.string(),
   name: z.string().optional(),
   url: z.string().optional(),
-  checksum: z.string().optional(),
-  status: z.string().optional(),
-  firmware: z.string().optional(),
-  hardware: z.string().optional(),
-  software: z.string().optional(),
 });
 
-export type IDevice = z.infer<typeof DeviceType>;
+export type IDevice = z.infer<typeof DeviceType> & IHealthType;
 
 export const DeviceDefaults: Partial<IDevice> = {
   name: 'Unknown Device',
-  url: '',
-  checksum: '-1',
-  status: DeviceStatus.Unknown,
-  firmware: 'N/A',
-  hardware: 'N/A',
-  software: 'N/A',
+  url: 'N/A',
 };

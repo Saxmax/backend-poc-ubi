@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { SuccessResponseMessage } from '../_common/SuccessResponseMessageType';
-import { DeviceDefaults, DeviceType } from '../_common/DeviceType';
+import { DeviceDefaults, DeviceType, IDevice } from '../_common/DeviceType';
 
 class UtilityService {
   static successResponse = (res: Response, message: SuccessResponseMessage, status = StatusCodes.OK) => {

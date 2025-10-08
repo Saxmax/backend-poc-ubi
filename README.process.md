@@ -7,6 +7,8 @@ within the time allotted to me.
 I am comfortable in the Node.js and NPM environment and I have experimented with the Express package before,
 so this felt like a good place to start. And doing things in TypeScript would help by just having the type definitions of new packages.
 
+I have throughout the project used the fake company name Fauxbiquiti as a way to present the app as a "real" product.
+
 ## Project Structure
 
 I looked up a few online resources showcasing their setup for a node/express/postgres app.
@@ -30,6 +32,16 @@ the SQL queries. As you can see I use helper functions in the `UtilityService` c
 wanted something completely dynamic; a custom `SqlQueriesService` class that could take minimum input and produce
 valid SQL queries for me to run.
 
+### Late Entry
+
+I thought I was finished with the project, had a re-read of the assignment instructions and quickly
+realized I had completely forgotten that the point was to use health endpoints to check for device health!
+I had built a simple database, nothing more. I don't know how that got by me.
+But I got to work immediately, implementing it the way I assume health endpoints might work in real products.
+To do this with only a few hours remaining, I had to cut some corners by trying to change as little of my existing code
+as possible since I did not want to end up ruining something and getting stuck in repairs.
+I believe it turned out fine in the end, for a PoC application to "the boss".
+
 ## AI Assistance
 
 As a developer I have attempted to incorporate use of AI in my coding habits but I have found that
@@ -46,3 +58,26 @@ So for this project specifically, the code is written solely by me, but I have u
 - Suggest packages to help with specific problems; e.g `zod` for validating incoming data, only picking out the bits that are of interest
 - Discuss the work test instructions to help me create a plan of features and see if I might have missed anything
 - Pasting code snippets regarding SQL queries to quickly point out what I might improve or do differently
+- Help me plan how to implement the health check feature (last minute, as noted in the section above) with minimal impact on my current project
+
+## With More Time ..
+
+Had I had more time for this project, there are a few key features I would have liked to implement.
+
+The only validation currently implemented is to strip the incoming data of properties that are of no interest.
+In a real world scenario this is not sufficient as also the incoming _values_ need to be validated,
+to prevent faulty data or SQL injections.
+
+For such a critical backend service there should really be a solid testing strategy implemented.
+Each feature should have tests performed to validate them. This was something I had as a stretch goal,
+but did not find the time to implement.
+
+I would have liked to have learned more about the tech involved in this service as this would
+let me code in a way where it is much easier to simply plug in real endpoints and data,
+to see if this PoC could actually be feasible as a real product.
+
+Obviously the database user and password should not be readily available in neither the `.env.sample` file nor the `.env` file, these would more likely be handled by another backend key manager service,
+but for this project they served to at least indicate such properties being considered with care.
+
+This is out of the scope of this project; i would have liked to draft up a simple web interface for interacting with the backend API. This would have fit the theme of the work test narrative of sending the
+"boss" a product for showcasing.

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import queries from '../services/queries';
 import UtilityService from '../services/utilities';
+import healthController from '../controllers/health';
 
 class DeviceController {
   getDevices = async (_req: Request, res: Response) => {
@@ -44,6 +45,7 @@ class DeviceController {
     try {
       const device = await queries.addDevice(props);
       const message = `Started monitoring device #${device.rows[0].id}`;
+      healthController.checkDeviceHealth(device.rows[0].id);
       UtilityService.successResponse(res, message, StatusCodes.CREATED);
     } catch (error: any) {
       UtilityService.errorResponse(res, error.message);

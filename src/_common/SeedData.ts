@@ -40,7 +40,7 @@ const getRandomMacAddress = () => {
   return mac;
 };
 
-const getRandomChecksum = () => {
+export const getRandomChecksum = () => {
   return `${Math.random()}`.substring(2);
 };
 
@@ -48,7 +48,7 @@ const getRandomStatus = () => {
   return UtilityService.getRandomFromArray(Object.values(DeviceStatus));
 };
 
-const getRandomVersion = () => {
+export const getRandomVersion = () => {
   const major_values = ['0', '1', '2'];
   const minor_values = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const patch_values = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -93,7 +93,7 @@ export const getDeviceUrl = (name: string) => {
     name = name.substring(remove.length);
   }
   name = name.replaceAll(' ', '%20');
-  return `https://${process.env.PG_TABLE}.fauxbiquiti.com/monitored?=${name.toLowerCase()}`;
+  return `http://${process.env.PG_TABLE}.fauxbiquiti.com/monitored/${name.toLowerCase()}`;
 };
 
 export const getDeviceDummyValues = (): Partial<IDevice> => {

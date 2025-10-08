@@ -37,14 +37,14 @@ class QueryService {
     return this.pool.query(query, [identifier]);
   };
 
-  checkExists = async () => {
+  checkTableExists = async () => {
     const query = `SELECT to_regclass('public.${process.env.PG_TABLE}') IS NOT NULL AS exists;`;
     const result = await this.pool.query(query);
     return result.rows[0].exists == true;
   };
 
   seedInitial = async (seedCount: number) => {
-    const tableExists = await this.checkExists();
+    const tableExists = await this.checkTableExists();
     if (tableExists == true) return;
 
     await this.pool.query(SeedTableCreate);
